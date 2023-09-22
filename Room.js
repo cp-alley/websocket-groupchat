@@ -67,6 +67,15 @@ class Room {
       member.send(JSON.stringify(data));
     }
   }
+
+  /** Send joke to current member
+   *
+   * @param data {string} joke to send
+   */
+
+  whisper(data, member) {
+    member.send(JSON.stringify(data));
+  }
 }
 
 module.exports = Room;

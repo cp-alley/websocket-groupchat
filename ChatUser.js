@@ -56,10 +56,11 @@ class ChatUser {
 
   handleChat(text) {
     if (text === "/joke") {
-      this.room.broadcast({
+      this.room.whisper({
+        name: "Server",
         type: "chat",
         text: "What did the mountain climber name his son? Cliff."
-      })
+      }, this);
     }
     this.room.broadcast({
       name: this.name,

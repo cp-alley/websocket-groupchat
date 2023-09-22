@@ -26,13 +26,13 @@ ws.onmessage = function (evt) {
   console.log("message", evt);
 
   let msg = JSON.parse(evt.data);
-  console.log("evt data=", evt.data)
+  console.log("evt data=", evt.data);
   let item;
 
   if (msg.type === "note") {
     item = $(`<li><i>${msg.text}</i></li>`);
-  } else if (msg.type === "chat" && msg.text === "/joke") {
-    item = $(`<li><b>${msg.name}: </b>${msg.text}</li>`);
+    // } else if (msg.type === "chat" && msg.text === "/joke") {
+    // item = $(`<li><b>${msg.name}: </b>${msg.text}</li>`);
   } else if (msg.type === "chat") {
     item = $(`<li><b>${msg.name}: </b>${msg.text}</li>`);
   } else {
