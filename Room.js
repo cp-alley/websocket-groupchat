@@ -76,6 +76,12 @@ class Room {
   whisper(data, member) {
     member.send(JSON.stringify(data));
   }
+
+  /** Return this room's members */
+  getMembers() {
+    const members = this.members;
+    return members;
+  }
 }
 
 module.exports = Room;

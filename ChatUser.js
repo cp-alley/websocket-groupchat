@@ -56,19 +56,19 @@ class ChatUser {
 
   handleChat(text) {
     if (text === "/joke") {
-      this.room.whisper({
-        name: "Server",
-        type: "chat",
-        text: "What did the mountain climber name his son? Cliff."
-      }, this);
+      this.send(JSON.stringify({
+          name: "Server",
+          type: "chat",
+          text: "What did the mountain climber name his son? Cliff."
+        })
+      );
     }
-    console.log(this.room.members.ChatUser.name);
     if (text === "/members") {
-      this.room.whisper({
+      this.send({
         name: "Server",
         type: "chat",
-        text: `In room: ${this.getMembers()}`
-      }, this);
+        text: `In room: ${this.room.getMembers()}`
+      });
     }
     this.room.broadcast({
       name: this.name,
@@ -106,10 +106,12 @@ class ChatUser {
     });
   }
 
-  getMembers() {
+  static getMembers() {
+    let members = [];
     for (let member of this.room.members) {
-      member.send(JSON.stringify(member.name));
+      members.push(member.name);
     }
+    return members.join(", ");
   }
 }
 
