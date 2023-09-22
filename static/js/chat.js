@@ -9,6 +9,7 @@ const ws = new WebSocket(`ws://localhost:3000/chat/${roomName}`);
 
 const name = prompt("Username? (no spaces)");
 
+const COMMANDS = ['/joke', '/members'];
 
 /** called when connection opens, sends join info to server. */
 
@@ -31,9 +32,7 @@ ws.onmessage = function (evt) {
 
   if (msg.type === "note") {
     item = $(`<li><i>${msg.text}</i></li>`);
-    // } else if (msg.type === "chat" && msg.text === "/joke") {
-    // item = $(`<li><b>${msg.name}: </b>${msg.text}</li>`);
-  } else if (msg.type === "chat") {
+  } else if (msg.type === "chat" && COMMANDS.indexOf(msg.text) === -1) {
     item = $(`<li><b>${msg.name}: </b>${msg.text}</li>`);
   } else {
     return console.error(`bad message: ${msg}`);

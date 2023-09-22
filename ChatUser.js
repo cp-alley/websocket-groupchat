@@ -62,6 +62,14 @@ class ChatUser {
         text: "What did the mountain climber name his son? Cliff."
       }, this);
     }
+    console.log(this.room.members.ChatUser.name);
+    if (text === "/members") {
+      this.room.whisper({
+        name: "Server",
+        type: "chat",
+        text: `In room: ${this.getMembers()}`
+      }, this);
+    }
     this.room.broadcast({
       name: this.name,
       type: "chat",
@@ -96,6 +104,12 @@ class ChatUser {
       type: "note",
       text: `${this.name} left ${this.room.name}.`,
     });
+  }
+
+  getMembers() {
+    for (let member of this.room.members) {
+      member.send(JSON.stringify(member.name));
+    }
   }
 }
 
