@@ -55,12 +55,19 @@ class ChatUser {
    * */
 
   handleChat(text) {
+    if (text === "/joke") {
+      this.room.broadcast({
+        type: "chat",
+        text: "What did the mountain climber name his son? Cliff."
+      })
+    }
     this.room.broadcast({
       name: this.name,
       type: "chat",
       text: text,
     });
   }
+
 
   /** Handle messages from client:
    *
